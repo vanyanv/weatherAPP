@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
 import LastMovieContext from '../LastMovieContext';
@@ -19,9 +19,9 @@ export default function SearchBar() {
   const { data, refetch } = fetch;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setLastMovie] = useContext(LastMovieContext);
-  const [lastMovie] = useContext(LastMovieContext) as MovieType[];
+  const [lastMovie] = useContext(LastMovieContext);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     refetch(); // Manually refetch
   };
