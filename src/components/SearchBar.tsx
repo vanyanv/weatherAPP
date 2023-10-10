@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import LastMovieContext from '../LastMovieContext';
 import fetchSearch from '../fetchSearch';
 import Movie from './Movie';
-import MovieType from '../ApiResponsesTypes';
+import { MovieType } from '../ApiResponsesTypes';
 
 /**
  * SearchBar component that allows the user to search for a movie title.

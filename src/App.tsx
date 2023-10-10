@@ -3,7 +3,8 @@ import { useState } from 'react';
 import SearchBar from './components/SearchBar.js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import LastMovieContext from './LastMovieContext.js';
-import MovieType from './ApiResponsesTypes.js';
+import { MovieType } from './ApiResponsesTypes.js';
+import PopularMovies from './components/PopularMovies.js';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,6 +23,7 @@ function App() {
       <LastMovieContext.Provider value={lastMovie}>
         <>
           <SearchBar />
+          <PopularMovies />
         </>
       </LastMovieContext.Provider>
     </QueryClientProvider>

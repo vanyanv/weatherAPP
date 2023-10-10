@@ -1,42 +1,43 @@
 import { createContext } from 'react';
-import MovieType from './ApiResponsesTypes';
+import { MovieType } from './ApiResponsesTypes';
+
 
 const LastMovieContext = createContext<
-  [MovieType | null, (lastMovie: MovieType) => void]
+    [MovieType | null, (lastMovie: MovieType) => void]
 >([
-  {
-    Title: '',
-    Year: '',
-    Rated: '',
-    Released: '',
-    Runtime: '',
-    Genre: '',
-    Director: '',
-    Writer: '',
-    Actors: '',
-    Plot: '',
-    Language: '',
-    Country: '',
-    Awards: '',
-    Poster: '',
-    Ratings: [
-      {
-        Source: '',
-        Value: '',
-      },
-    ],
-    Metascore: '',
-    imdbRating: '',
-    imdbVotes: '',
-    imdbID: '',
-    Type: '',
-    DVD: '',
-    BoxOffice: '',
-    Production: '',
-    Website: '',
-    Response: '',
-  },
-  () => {},
+    {
+        Title: '',
+        Year: '',
+        Rated: '',
+        Released: '',
+        Runtime: '',
+        Genre: '',
+        Director: '',
+        Writer: '',
+        Actors: '',
+        Plot: '',
+        Language: '',
+        Country: '',
+        Awards: '',
+        Poster: '',
+        Ratings: [
+            {
+                Source: '',
+                Value: '',
+            },
+        ],
+        Metascore: '',
+        imdbRating: '',
+        imdbVotes: '',
+        imdbID: '',
+        Type: '',
+        DVD: '',
+        BoxOffice: '',
+        Production: '',
+        Website: '',
+        Response: '',
+    },
+    () => {},
 ]);
 
 export default LastMovieContext;

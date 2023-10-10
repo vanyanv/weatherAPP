@@ -1,4 +1,4 @@
-import MovieType from './ApiResponsesTypes';
+import { MovieType } from './ApiResponsesTypes';
 import { QueryFunction } from '@tanstack/react-query';
 
 const fetchSearch: QueryFunction<MovieType, ['search', string]> = async ({

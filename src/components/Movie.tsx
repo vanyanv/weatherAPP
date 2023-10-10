@@ -1,11 +1,11 @@
-import MovieType from '../ApiResponsesTypes';
+import { MovieType } from '../ApiResponsesTypes';
 
 type Props = {
   fetch: {
     data: MovieType;
     isLoading: boolean;
   };
-}
+};
 
 export default function Movie({ fetch }: Props) {
   const { data, isLoading } = fetch;
