@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import MovieType from './ApiResponsesTypes';
 
 const LastMovieContext = createContext<
-  [MovieType, (lastMovie: MovieType) => void]
+  [MovieType | null, (lastMovie: MovieType) => void]
 >([
   {
     Title: '',

@@ -13,7 +13,7 @@ import MovieType from '../ApiResponsesTypes';
 
 export default function SearchBar() {
   const [search, setSearch] = useState('');
-  const fetch = useQuery<MovieType>(['search', search], fetchSearch, {
+  const fetch = useQuery(['search', search], fetchSearch, {
     enabled: false,
   });
   const { data, refetch } = fetch;
@@ -28,12 +28,24 @@ export default function SearchBar() {
 
   useEffect(() => {
     if (data) {
-      setLastMovie(data);
+      setLastMovie(data as MovieType);
     }
   }, [data, setLastMovie]);
 
+  //styling
+  const myStyle = {
+    height: '150px',
+    padding: '3px',
+  };
   return (
     <div>
+      {lastMovie ? (
+        <h3>
+          Last Search: <img style={myStyle} src={lastMovie.Poster}></img>
+        </h3>
+      ) : (
+        <h1></h1>
+      )}
       <form onSubmit={handleSubmit}>
         <label>
           Search Title
@@ -41,12 +53,11 @@ export default function SearchBar() {
             type='text'
             name='search'
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.currentTarget.value)}
           ></input>
         </label>
         <button type='submit'>Search Movie</button>
       </form>
-      {lastMovie ? <h3>Last Search: {lastMovie.Title}</h3> : <h1></h1>}
       {!data ? <div></div> : <Movie fetch={fetch} />}
     </div>
   );
