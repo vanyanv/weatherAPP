@@ -1,10 +1,10 @@
 import './App.css';
-import { useState } from 'react';
 import SearchBar from './components/SearchBar.js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import LastMovieContext from './LastMovieContext.js';
+import { Provider } from 'react-redux';
+import store from './store';
 import { MovieType } from './ApiResponsesTypes.js';
-import PopularMovies from './components/PopularMovies.js';
+import PopularMovies from './components/PopularMovies.jsx';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,16 +16,14 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const lastMovie = useState(null as MovieType | null);
-
   return (
     <QueryClientProvider client={queryClient}>
-      <LastMovieContext.Provider value={lastMovie}>
+      <Provider store={store}>
         <>
           <SearchBar />
           <PopularMovies />
         </>
-      </LastMovieContext.Provider>
+      </Provider>
     </QueryClientProvider>
   );
 }

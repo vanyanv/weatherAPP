@@ -1,51 +1,48 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useContext } from 'react';
-import LastMovieContext from '../LastMovieContext';
+import { useDispatch, useSelector } from 'react-redux';
+//@ts-ignore
+import { setLastMovie } from '../lastMovieSlice';
 import fetchSearch from '../fetchSearch';
 import Movie from './Movie';
-import { MovieType } from '../ApiResponsesTypes';
-
-/**
- * SearchBar component that allows the user to search for a movie title.
- * @returns {JSX.Element} SearchBar component UI.
- */
-
 export default function SearchBar() {
   const [search, setSearch] = useState('');
   const fetch = useQuery(['search', search], fetchSearch, {
     enabled: false,
   });
   const { data, refetch } = fetch;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setLastMovie] = useContext(LastMovieContext);
-  const [lastMovie] = useContext(LastMovieContext);
+
+  //redux
+  const dispatch = useDispatch();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     refetch(); // Manually refetch
   };
 
-  useEffect(() => {
-    if (data) {
-      setLastMovie(data as MovieType);
-    }
-  }, [data, setLastMovie]);
+  const searchedMovies = useSelector((state: any) => state.lastMovie.value);
+  console.log('searched Movies in Redux:', searchedMovies);
 
-  //styling
+  useEffect(() => {
+    if (data?.Response === 'True') {
+      console.log(data);
+      dispatch(setLastMovie(data));
+    }
+  }, [data]);
+
   const myStyle = {
     height: '150px',
     padding: '3px',
   };
   return (
     <div>
-      {lastMovie ? (
-        <h3>
-          Last Search: <img style={myStyle} src={lastMovie.Poster}></img>
-        </h3>
-      ) : (
-        <h1></h1>
-      )}
+      {searchedMovies.map((movie: any) => {
+        return (
+          <div key={movie.imdbID}>
+            <img style={myStyle} src={movie.Poster} alt='movie poster'></img>
+          </div>
+        );
+      })}
       <form onSubmit={handleSubmit}>
         <label>
           Search Title
