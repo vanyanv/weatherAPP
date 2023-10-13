@@ -1,10 +1,16 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
-//@ts-ignore
 import { setLastMovie } from '../lastMovieSlice';
 import fetchSearch from '../fetchSearch';
 import Movie from './Movie';
+import { MovieType } from '../ApiResponsesTypes';
+
+type MyState = {
+  lastMovie: {
+    value: MovieType[];
+  };
+};
 export default function SearchBar() {
   const [search, setSearch] = useState('');
   const fetch = useQuery(['search', search], fetchSearch, {
@@ -20,7 +26,7 @@ export default function SearchBar() {
     refetch(); // Manually refetch
   };
 
-  const searchedMovies = useSelector((state: any) => state.lastMovie.value);
+  const searchedMovies = useSelector((state: MyState) => state.lastMovie.value);
   console.log('searched Movies in Redux:', searchedMovies);
 
   useEffect(() => {
@@ -36,13 +42,21 @@ export default function SearchBar() {
   };
   return (
     <div>
-      {searchedMovies.map((movie: any) => {
-        return (
-          <div key={movie.imdbID}>
-            <img style={myStyle} src={movie.Poster} alt='movie poster'></img>
-          </div>
-        );
-      })}
+      <h2>History</h2>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        {searchedMovies.map((movie: any) => {
+          return (
+            <div key={movie.imdbID}>
+              <img style={myStyle} src={movie.Poster} alt='movie poster'></img>
+            </div>
+          );
+        })}
+      </div>
       <form onSubmit={handleSubmit}>
         <label>
           Search Title

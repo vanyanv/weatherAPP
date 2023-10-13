@@ -32,12 +32,12 @@ export default function Movie({ fetch }: Props) {
         </thead>
         <tbody>
           <tr>
-            <td>{data.Title}</td>
-            <td>{data.Year}</td>
-            <td>{data.Type}</td>
-            <td>{data.imdbID}</td>
+            <td data-testid='movie-title'>{data.Title}</td>
+            <td data-testid='movie-year'>{data.Year}</td>
+            <td data-testid='movie-type'>{data.Type}</td>
+            <td data-testid='movie-imdbID'>{data.imdbID}</td>
             <td>
-              <img src={`${data.Poster}`}></img>
+              <img data-testid='movie-poster' src={`${data.Poster}`}></img>
             </td>
           </tr>
         </tbody>
