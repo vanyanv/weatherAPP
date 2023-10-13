@@ -8,7 +8,6 @@ test('Displays Searched Movie Information', async () => {
     <Movie
       fetch={{
         data: mockMovieData,
-        isLoading: false,
       }}
     />
   );
@@ -28,21 +27,6 @@ test('Displays Searched Movie Information', async () => {
   movie.unmount();
 });
 
-test('Displays Loading Message', async () => {
-  const movie = render(
-    <Movie
-      fetch={{
-        data: mockMovieData,
-        isLoading: true,
-      }}
-    />
-  );
-
-  const loading = await movie.findByText('Loading....');
-  expect(loading.textContent).toBe('Loading....');
-  movie.unmount();
-});
-
 test('Displays Movie Not Found Message', async () => {
   const movie = render(
     <Movie
@@ -51,7 +35,6 @@ test('Displays Movie Not Found Message', async () => {
           ...mockMovieData,
           Response: 'False',
         },
-        isLoading: false,
       }}
     />
   );

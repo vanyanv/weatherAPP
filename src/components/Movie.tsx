@@ -3,19 +3,14 @@ import { MovieType } from '../ApiResponsesTypes';
 type Props = {
   fetch: {
     data: MovieType;
-    isLoading: boolean;
   };
 };
 
 export default function Movie({ fetch }: Props) {
-  const { data, isLoading } = fetch;
+  const { data } = fetch;
 
   if (data.Response === 'False') {
     return <h2>Movie Not Found</h2>;
-  }
-
-  if (isLoading) {
-    return <h2>Loading....</h2>;
   }
 
   return (
